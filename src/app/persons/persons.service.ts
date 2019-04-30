@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root' // its called injectable because we can inject services into other components using
@@ -16,7 +16,7 @@ export class PersonsService {
   constructor(private http: HttpClient) {}
 
   fetchPersons() {
-    this.http.get<any>('https://swapi.co/api/people').pipe(map(resData => {
+    this.http.get<any>('https://swapi.co/api/people/').pipe(map(resData => {
       return resData.results.map(character => character.name);
     })).subscribe(transformedData => {
       this.personsChanged.next(transformedData);
